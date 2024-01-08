@@ -5,26 +5,10 @@ const Info = ({nextStep}) => {
 
     const {register , handleSubmit} = useForm();
 
-const onSubmit = async(data) =>{
-    try  {
-      const response = await fetch('http://localhost:5000/submit-form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        console.log('Données du formulaire soumises avec succès');
+    const onSubmit = (data) => {
+        console.log(data);
         nextStep();
-      } else {
-        console.error('Échec de la soumission des données du formulaire');
-      }
-    } catch (error) {
-      console.error('Une erreur s\'est produite lors de la soumission des données du formulaire', error);
-    }
-  }
+    };
 
   return (
     <div className="Info flex items-center justify-center h-screen">

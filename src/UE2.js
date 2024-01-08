@@ -1,29 +1,39 @@
-import React from 'react';
+import React ,{useContext} from "react";
 import {useForm , } from "react-hook-form"
+import { Context } from "./context";
+
 
 
 const UE2 = ({nextStep}) => {
   const {register , handleSubmit} = useForm();
-  const onSubmit = async(data) =>{
-    try  {
-      const response = await fetch('http://localhost:5000/submit-form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+  const [cont , setCont] = useContext(Context)
+  //    const onSubmit = async(data) =>{
+  //   try  {
+  //     const response = await fetch('http://localhost:5000/submit-form', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
 
-      if (response.ok) {
-        console.log('Données du formulaire soumises avec succès');
-        nextStep();
-      } else {
-        console.error('Échec de la soumission des données du formulaire');
-      }
-    } catch (error) {
-      console.error('Une erreur s\'est produite lors de la soumission des données du formulaire', error);
-    }
-  }
+  //     if (response.ok) {
+  //       console.log('Données du formulaire soumises avec succès');
+  //       nextStep();
+  //     } else {
+  //       console.error('Échec de la soumission des données du formulaire');
+  //     }
+  //   } catch (error) {
+  //     console.error('Une erreur s\'est produite lors de la soumission des données du formulaire', error);
+  //   }
+  // }
+  const onSubmit = (data) => {
+    console.log(data);
+    
+    setCont({...cont , ue2 : data});
+
+    nextStep();
+};
 
   
     return (
@@ -31,7 +41,7 @@ const UE2 = ({nextStep}) => {
             <div className="Info flex items-center justify-center h-screen">
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-xl p-6 bg-white rounded-md shadow-md flex flex-col items-center">
         <h2 className="text-2xl font-bold leading-9 text-gray-900 mb-6">
-          UE1 -Developpement de Sites et Reseaux
+          UE2 -Developpement de Sites et Reseaux
         </h2>
 
         {/* Matière 1 */}

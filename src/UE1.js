@@ -1,28 +1,18 @@
-import React from "react";
+import React ,{useContext} from "react";
 import {useForm , } from 'react-hook-form'
+import { Context } from "./context";
 
 const UE1 = ({nextStep}) => {
   const {register , handleSubmit} = useForm();
-  
-  const onSubmit = async(data) =>{
-    try  {
-      const response = await fetch('http://localhost:5000/submit-form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+  const [cont , setCont] = useContext(Context)
 
-      if (response.ok) {
-        console.log('Données du formulaire soumises avec succès');
-        nextStep();
-      } else {
-        console.error('Échec de la soumission des données du formulaire');
-      }
-    } catch (error) {
-      console.error('Une erreur s\'est produite lors de la soumission des données du formulaire', error);
-    }
+  
+  const onSubmit = (data) =>{
+    console.log(data);
+
+    setCont({...cont, ue1 : data});
+
+    nextStep();
   }
   return (
     <div className="UE flex items-center justify-center h-screen">
